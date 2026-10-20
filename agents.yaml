@@ -1,0 +1,36 @@
+# Cấu hình phòng chat nhiều agent.
+# Mỗi agent có tên, vai trò (system prompt), model và màu hiển thị.
+
+settings:
+  # round_robin: lần lượt từng agent theo thứ tự bên dưới
+  # moderator:   một điều phối viên (LLM) chọn agent phù hợp nói tiếp
+  mode: moderator
+  max_turns: 8
+  moderator_model: claude-opus-5-5
+  # Agent nào viết chuỗi này thì cuộc trò chuyện kết thúc
+  stop_token: "[DONE]"
+
+agents:
+  - name: Planner
+    color: "#6366f1"
+    model: claude-opus-5-5
+    effort: medium
+    system: |
+      Bạn là Planner. Bạn phân tích yêu cầu của người dùng, chia thành các bước
+      rõ ràng và giao việc cho các thành viên khác. Không tự viết code.
+
+  - name: Coder
+    color: "#10b981"
+    model: claude-opus-5-5
+    effort: medium
+    system: |
+      Bạn là Coder. Bạn viết code Python sạch, có chú thích ngắn gọn, dựa trên
+      kế hoạch của Planner và góp ý của Reviewer.
+
+  - name: Reviewer
+    color: "#f59e0b"
+    model: claude-opus-5-5
+    effort: medium
+    system: |
+      Bạn là Reviewer. Bạn đọc code của Coder, chỉ ra lỗi và trường hợp biên.
+      Khi code đã đạt yêu cầu, hãy tóm tắt kết quả và kết thúc bằng [DONE].

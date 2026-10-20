@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AgentChat</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <h1>AgentChat</h1>
+    <p class="muted">Nhiều agent cùng làm việc trong một phòng.</p>
+
+    <section>
+      <h2>Thành viên</h2>
+      <ul id="agents"></ul>
+    </section>
+
+    <section>
+      <h2>Cài đặt</h2>
+      <label>Chế độ điều phối
+        <select id="mode">
+          <option value="moderator">Điều phối viên chọn người nói</option>
+          <option value="round_robin">Lần lượt (round robin)</option>
+        </select>
+      </label>
+      <label>Số lượt tối đa
+        <input id="max-turns" type="number" min="1" max="50" value="8">
+      </label>
+    </section>
+
+    <div class="status"><span id="status-dot"></span><span id="status-text">Đang kết nối…</span></div>
+  </aside>
+
+  <main>
+    <div id="messages" aria-live="polite"></div>
+    <form id="composer">
+      <textarea id="input" rows="2" placeholder="Giao nhiệm vụ cho nhóm, hoặc chen vào khi các agent đang nói… (Enter để gửi)"></textarea>
+      <div class="buttons">
+        <button type="submit" id="send">Gửi</button>
+        <button type="button" id="stop" class="secondary" disabled>Dừng</button>
+        <button type="button" id="reset" class="secondary">Xóa</button>
+      </div>
+    </form>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
